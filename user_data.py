@@ -1,27 +1,36 @@
-from abc import ABC
+"""
+This module defines the data needed to run the program and the abstract class to get it
+Author: Sela
+"""
+
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from ipaddress import IPv4Network
-from typing import List
+from typing import Tuple
 
 
 @dataclass
 class NeededData:
-    protocol: List[str]
+    protocol: Tuple[str]
     network: IPv4Network
     port: int
-    output_method: List[str]
+    output_method: Tuple[str]
 
 
 class UserData(ABC):
-    def __init__(self):
-        # self.protocols: List[str]
-        # self.network: IPv4Network
-        # self.port: int
-        # self.output_method: list
-        user_data: NeededData
-        user_data = self.get_user_input()
+    """
+    Class with abstract method to define how to get user input
+    """
 
-    def get_user_input(self) -> NeededData:
+    def __init__(self):
+        self.user_data = self._get_user_input()
+
+    @abstractmethod
+    def _get_user_input(self) -> NeededData:
         """
         Get the needed user data to run this program
         """
+
+    def __str__(self):
+        return (f"The protocols used are: {self.user_data.protocol}, the network is {self.user_data.network}, "
+                f"the port is {self.user_data.port} and the output method is {self.user_data.output_method}")
