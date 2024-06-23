@@ -56,10 +56,10 @@ class Scanner:
         """
         src_port = randint(5000, 6000)
         for network in self.user_data.network:
-            packet = scapy.IP(dst=network) / scapy.TCP(dst_port=self.user_data.port, sport=src_port,
-                                                       flags=protocol)
-            received_packet = scapy.SR1(packet, timeout=2)
-            if protocol == 'SYN' and "S" in received_packet.TCP(flags):
+            packet = scapy.IP(dst=network) / scapy.TCP(dport=self.user_data.port, sport=src_port,
+                                                       flags=protocol.capitalize())
+            received_packet = scapy.sr1(packet, timeout=2)
+            if protocol == 's' and "S" in received_packet.TCP(flags):
                 self.living_networks[protocol].append(network)
-            elif protocol == 'WIN' and received_packet.TCP(window) is not None:
+            elif protocol == 'w' and received_packet.TCP(window) is not None:
                 self.living_networks[protocol].append(network)
