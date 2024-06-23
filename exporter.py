@@ -18,7 +18,6 @@ class Exporter:
     def exporter(self):
         """
         Handles the exporting
-        :return:
         """
         for method in self.methods:
             if method == 'print':
@@ -29,7 +28,6 @@ class Exporter:
     def _print_to_screen(self):
         """
         Prints the networks to the screen.
-        :return:
         """
         for protocol in self.protocols:
             print(f"The networks alive in protocol {protocol} are {self.networks[protocol]}")

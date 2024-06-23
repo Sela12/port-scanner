@@ -17,8 +17,9 @@ class CMDInput(UserData):
 
     def _get_user_input(self) -> NeededData:
         parser = argparse.ArgumentParser()
-        parser.add_argument("-u", "--UDP", help="Use UDP", dest='protocols', action="append_const", const='UDP')
-        parser.add_argument("-t", "--TCP", help="Use TCP", dest='protocols', action="append_const", const='TCP')
+        parser.add_argument("Protocol", choices=['u', 't', 's', 'w'],
+                            help="Which search method you want to try [UDP, TCP, TCP(SYN), TCP(Window size)",
+                            type=str, nargs='+')
         parser.add_argument("Network", help="The IP range you want to test. example: 0.0.0.0/24",
                             type=IPv4Network)
         parser.add_argument("Port", help="The port you want to try", type=int)
@@ -27,5 +28,5 @@ class CMDInput(UserData):
         parser.add_argument("-j", "--json", help="Export to jason file: -j <filename>.json",
                             dest='output', action="append")
         args = parser.parse_args()
-        print(args.output)
-        return NeededData(args.protocols, args.Network, args.Port, args.output)
+        print(args.Protocol)
+        return NeededData(args.Protocol, args.Network, args.Port, args.output)
