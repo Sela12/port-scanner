@@ -1,12 +1,11 @@
 """
-This program scans a network in IPv4 to see which addresses are alive in a port specified by th user
+This program scans a network in IPv4 to see which addresses are alive in a port specified by the user
 Author: Sela
 """
 
-from exporter import Exporter
-
 from input_from_cmd import CMDInput
 from scanner import Scanner
+from exporter import Exporter
 
 
 def main():
